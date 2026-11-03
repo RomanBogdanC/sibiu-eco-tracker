@@ -1,0 +1,251 @@
+:root {
+    --bg-color: #f4f7f6;
+    --text-color: #2c3e50;
+    --header-bg: #1a252f;
+    --card-bg: #ffffff;
+    --btn-bg: #3498db;
+    --btn-hover: #2980b9;
+    --color-good: #2ecc71;
+    --color-moderate: #f39c12;
+    --color-poor: #e74c3c;
+    --color-highlight: #fff9c4; 
+    --color-eco: #e8f5e9;
+}
+
+/* Resetare strictă Box-Model global */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--header-bg);
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 1600px; /* Full-width dashboard */
+    margin: 0 auto;
+    padding: 0 40px; 
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* --- Layout Grid Proporțional --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 55fr 45fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.dashboard-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.card, .banner {
+    background-color: var(--card-bg);
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 2rem;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.recommendations-card {
+    background-color: var(--color-eco);
+    border-color: #81c784;
+}
+
+.data-row {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.bg-good { border-top: 10px solid var(--color-good); }
+.bg-moderate { border-top: 10px solid var(--color-moderate); }
+.bg-poor { border-top: 10px solid var(--color-poor); }
+
+/* --- Map Header & Container Buton Transparent --- */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.map-card { 
+    padding: 1.5rem; 
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container curățat, complet transparent, doar cu funcție de aliniere */
+#controls-container {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    background-color: var(--btn-bg);
+    color: #ffffff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover { 
+    background-color: var(--btn-hover); 
+}
+
+/* --- Harta --- */
+#map {
+    min-height: 550px;
+    height: 600px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #bdc3c7;
+    z-index: 1; 
+}
+
+/* --- Liste și Highlight --- */
+#traffic-list, #tursib-recommendations { 
+    list-style-type: none; 
+    margin-top: 1.2rem; 
+}
+
+#traffic-list li, #tursib-recommendations li {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ecf0f1;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    transition: background-color 0.4s ease, transform 0.2s ease;
+}
+
+.highlight {
+    background-color: var(--color-highlight);
+    border-left: 5px solid var(--color-moderate);
+    transform: translateX(10px);
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--header-bg);
+    color: #ffffff;
+    margin-top: 3rem;
+}
+
+/* --- Loading Overlay --- */
+#loading-overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    z-index: 9999; 
+    visibility: hidden; 
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#loading-overlay.active { 
+    visibility: visible; 
+    opacity: 1; 
+}
+
+.spinner { 
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    color: var(--text-color); 
+}
+
+/* --- Mobile Responsiveness (Device Mode) --- */
+@media (max-width: 768px) {
+    main { 
+        padding: 0 20px; 
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Adaptare titlu hartă și buton pentru tabletă/mobil */
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    #controls-container { 
+        width: 100%; 
+    }
+    
+    button { 
+        width: 100%; 
+        padding: 1rem; 
+    }
+
+    #map { 
+        min-height: 400px; 
+        height: 400px; 
+    }
+    
+    .card, .banner { 
+        padding: 1.5rem; 
+    }
+}
+
+@media (max-width: 390px) {
+    main { 
+        padding: 0 15px; 
+    }
+    
+    header h1 { 
+        font-size: 1.5rem; 
+    }
+    
+    .data-row { 
+        font-size: 1.1rem; 
+    }
+    
+    #map { 
+        min-height: 350px; 
+        height: 350px; 
+    }
+}

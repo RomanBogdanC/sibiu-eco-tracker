@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sibiu AirQuality & Eco-Traffic Tracker - Monitorizare aer, trafic și rute alternative în timp real.">
+    <title>Sibiu AirQuality & Eco-Traffic</title>
+    
+    <!-- CSS Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Overlay de încărcare -->
+    <div id="loading-overlay" aria-hidden="true">
+        <div class="spinner">Încărcare date Sibiu...</div>
+    </div>
+
+    <header>
+        <h1>Sibiu Eco-Tracker</h1>
+        <p>Monitorizare Calitate Aer, Trafic & Rute Alternative</p>
+    </header>
+
+    <main>
+        <!-- Containerul principal Grid pentru Dashboard (Full-Width) -->
+        <div class="dashboard-grid">
+            
+            <!-- Coloana Stângă (Harta 55%) -->
+            <div class="dashboard-left">
+                <section id="map-section">
+                    <div class="card map-card">
+                        <!-- Header-ul Hărții conține acum și Butonul de Refresh -->
+                        <div class="card-header">
+                            <h2>Harta Eco-Zone Sibiu</h2>
+                            
+                            <!-- Container pentru demonstrarea Event Bubbling-ului -->
+                            <div id="controls-container">
+                                <button id="btn-refresh" aria-label="Reîmprospătare date aer și trafic">Reîmprospătare Date</button>
+                            </div>
+                        </div>
+                        <div id="map" aria-label="Hartă interactivă cu străzile monitorizate"></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Coloana Dreaptă (Widget-uri Informative 45%) -->
+            <div class="dashboard-right">
+                <!-- Card Calitate Aer -->
+                <section id="aqi-section">
+                    <div id="aqi-card" class="card bg-good">
+                        <h2>Calitatea Aerului (AQI)</h2>
+                        <p class="data-row">Indice General (AQI): <span id="aqi-value">--</span></p>
+                        <p class="data-row">Particule PM2.5: <span id="pm25-value">--</span> µg/m³</p>
+                    </div>
+                </section>
+
+                <!-- Recomandări Eco-Routing (Tursib) -->
+                <section id="recommendations-section">
+                    <div class="card recommendations-card">
+                        <h2>Recomandări Eco-Routing Tursib</h2>
+                        <ul id="tursib-recommendations">
+                            <li>Se evaluează traseele...</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Status Trafic -->
+                <section id="traffic-section">
+                    <div id="traffic-banner" class="banner">
+                        <h2>Status Trafic Eco</h2>
+                        <ul id="traffic-list">
+                            <li>Se încarcă statusul arterelor...</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div> <!-- Final dashboard-grid -->
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Laborator Tehnologii Web Avansate - Fără Framework-uri</p>
+    </footer>
+
+    <!-- JS Leaflet & Logica Aplicației -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
